@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Clock</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.clock {
+    background-color: #333;
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    font-size: 40px;
+}
+
+.time {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.date {
+    font-size: 20px;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="clock" id="clock">
+        <div class="time" id="time"></div>
+        <div class="date" id="date"></div>
+    </div>
+
+    <script>
+ 
+function updateClock() {
+    const timeElement = document.getElementById("time");
+    const dateElement = document.getElementById("date");
+
+    
+    const now = new Date();
+
+   
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+
+ 
+    hours = hours < 10 ? '0' + hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+    timeElement.textContent = `${hours}:${minutes}:${seconds}`;
+
+  
+    const dayOfWeek = now.toLocaleString('en-us', { weekday: 'long' });
+    const month = now.toLocaleString('en-us', { month: 'long' });
+    const day = now.getDate();
+    const year = now.getFullYear();
+    const formattedDate = `${dayOfWeek}, ${month} ${day}, ${year}`;
+
+    dateElement.textContent = formattedDate;
+}
+
+
+setInterval(updateClock, 1000);
+
+
+updateClock();
+
+    </script>
+</body>
+</html>
